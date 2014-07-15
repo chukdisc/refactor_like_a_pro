@@ -1,7 +1,8 @@
-class Play
+class Game
+  MOVES = ['rock', 'paper', 'scissors']
+
   def initialize(number_of_rounds)
     @number_of_rounds = number_of_rounds
-    @moves = ['rock', 'paper', 'scissors']
     @user_score = 0
     @computer_score = 0
   end
@@ -10,8 +11,10 @@ class Play
     @number_of_rounds.times do
       ask_user_for_move
       generate_computer_move
+      introduce_round
       print_moves
-      compare_moves
+      round = Round.new(@user_move, @computer_move)
+      round.evaluate
     end
   end
 
@@ -22,45 +25,22 @@ class Play
   end
 
   def generate_computer_move
-    #@computer_move = @moves.sample
-    
-    # case @user_move
-    # when 'rock'
-    #   @computer_move = 'paper'
-    # when 'scissors'
-    #   @computer_move = 'rock'
-    # when 'paper'
-    #   @computer_move = 'scissors'
-    # end
-
-    case @user_move
-    when 'rock'
-      @computer_move = 'scissors'
-    when 'scissors'
-      @computer_move = 'paper'
-    when 'paper'
-      @computer_move = 'rock'
-    end
+    @computer_move = MOVES.sample
   end
 
-  def print_moves
+  def introduce_round
     puts
     puts "Rock!  Paper!  Scissors!  Shoot!"
     puts "..."
     sleep(1)
+  end
+
+  def print_moves
     puts "You: #{@user_move}"
     puts "Computer: #{@computer_move}"
   end
 
   def compare_moves
-    case [@user_move, @computer_move]
-    when ['rock', 'scissors'], ['paper', 'rock'], ['scissors', 'paper']
-      print_user_win
-    when ['rock', 'rock'], ['scissors', 'scissors'], ['paper', 'paper']
-      print_tie
-    when ['scissors', 'rock'], ['rock', 'paper'], ['paper', 'scissors']
-      print_computer_win
-    end
   end
 
   def print_user_win
@@ -96,6 +76,37 @@ class Play
     puts "--------------------------------"
     puts
   end
+end
+
+class Round
+def initialize
+  @user_move = user_move
+  @computer_move = computer_move
+end
+
+def evaluate
+  case [@user_move, @computer_move]
+  when ['rock', 'scissors'], ['paper', 'rock'], ['scissors', 'paper']
+    user
+  when ['rock', 'rock'], ['scissors', 'scissors'], ['paper', 'paper']
+    tie
+  when ['scissors', 'rock'], ['rock', 'paper'], ['paper', 'scissors']
+    computer
+  end
+end
+
+class Player
+  def initialize
+
+  end
+end
+
+class Computer
+  def initialize
+
+  end
+end
+
 end
 
 play = Play.new(3)
