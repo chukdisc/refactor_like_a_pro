@@ -1,18 +1,15 @@
-# Message is displayed to user asking them to enter rock, paper or scissors
-# Take user input
-# Print "Rock, Paper, Scissors, shoot!" to the screen
-# Display user selection and AI selection
-# Print which player wins
-# Add point to winner score tally
 class Play
   def initialize
+    @moves = ['rock', 'paper', 'scissors']
+    @user_score = 0
+    @computer_score = 0
   end
 
   def play
     ask_user_for_move
+    generate_computer_move
     print_moves
-    print_winner
-    score_points 
+    compare_moves
   end
 
   def ask_user_for_move
@@ -21,11 +18,57 @@ class Play
     @user_move = gets.chomp
   end
 
+  def generate_computer_move
+    @computer_move = @moves.sample
+  end
+
   def print_moves
     puts
     puts "Rock!  Paper!  Scissors!  Shoot!"
     puts "..."
-    sleep(2)
+    sleep(1)
     puts "You: #{@user_move}"
+    puts "Computer: #{@computer_move}"
+  end
+
+  def compare_moves
+    case [@user_move, @computer_move]
+    when ['rock', 'scissors'], ['paper', 'rock'], ['scissors', 'paper']
+      print_user_win
+      score_user
+    when ['rock', 'rock'], ['scissors', 'scissors'], ['paper', 'paper']
+      print_tie
+    when ['scissors', 'rock'], ['rock', 'paper'], ['paper', 'scissors']
+      print_computer_win
+      score_computer
+    end
+  end
+
+  def print_user_win
+    puts "Congratulations, you won!"
+  end
+
+  def print_computer_win
+    puts "Sorry, you lost"
+  end
+
+  def print_tie
+    puts "You tied!"
+  end
+
+  def score_user
+
+  end
+
+  def score_computer
+
+  end
+
+  def print_scores
+    puts "You: #{@user_score} points"
+    puts "Computer: #{@computer_score} points"
   end
 end
+
+play = Play.new
+play.play
