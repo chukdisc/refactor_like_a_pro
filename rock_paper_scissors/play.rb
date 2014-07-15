@@ -1,15 +1,18 @@
 class Play
-  def initialize
+  def initialize(number_of_rounds)
+    @number_of_rounds = number_of_rounds
     @moves = ['rock', 'paper', 'scissors']
     @user_score = 0
     @computer_score = 0
   end
 
   def play
+    @number_of_rounds.times do
     ask_user_for_move
     generate_computer_move
     print_moves
     compare_moves
+    end
   end
 
   def ask_user_for_move
@@ -35,40 +38,47 @@ class Play
     case [@user_move, @computer_move]
     when ['rock', 'scissors'], ['paper', 'rock'], ['scissors', 'paper']
       print_user_win
-      score_user
     when ['rock', 'rock'], ['scissors', 'scissors'], ['paper', 'paper']
       print_tie
     when ['scissors', 'rock'], ['rock', 'paper'], ['paper', 'scissors']
       print_computer_win
-      score_computer
     end
   end
 
   def print_user_win
     puts "Congratulations, you won!"
+    score_user
+    print_scores
   end
 
   def print_computer_win
     puts "Sorry, you lost"
+    score_computer
+    print_scores
   end
 
   def print_tie
     puts "You tied!"
+    print_scores
   end
 
   def score_user
-
+    @user_score += 1
   end
 
   def score_computer
+    @computer_score += 1
 
   end
 
   def print_scores
-    puts "You: #{@user_score} points"
-    puts "Computer: #{@computer_score} points"
+    puts "You: #{@user_score}"
+    puts "Computer: #{@computer_score}"
+    sleep(1)
+    puts "--------------------------------"
+    puts
   end
 end
 
-play = Play.new
+play = Play.new(3)
 play.play
