@@ -8,21 +8,29 @@ class Play
 
   def play
     @number_of_rounds.times do
-    ask_user_for_move
-    generate_computer_move
-    print_moves
-    compare_moves
+      ask_user_for_move
+      generate_computer_move
+      print_moves
+      compare_moves
     end
   end
 
   def ask_user_for_move
     puts "You can choose 'rock', 'paper' or 'scissors'."
     puts "Please enter your move:"
-    @user_move = gets.chomp
+    @user_move = gets.chomp.downcase
   end
 
   def generate_computer_move
-    @computer_move = @moves.sample
+    #@computer_move = @moves.sample
+    case @user_move
+    when 'rock'
+      @computer_move = 'paper'
+    when 'scissors'
+      @computer_move = 'rock'
+    when 'paper'
+      @computer_move = 'scissors'
+    end
   end
 
   def print_moves
