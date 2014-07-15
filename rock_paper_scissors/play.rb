@@ -23,13 +23,23 @@ class Play
 
   def generate_computer_move
     #@computer_move = @moves.sample
+    
+    # case @user_move
+    # when 'rock'
+    #   @computer_move = 'paper'
+    # when 'scissors'
+    #   @computer_move = 'rock'
+    # when 'paper'
+    #   @computer_move = 'scissors'
+    # end
+
     case @user_move
     when 'rock'
-      @computer_move = 'paper'
-    when 'scissors'
-      @computer_move = 'rock'
-    when 'paper'
       @computer_move = 'scissors'
+    when 'scissors'
+      @computer_move = 'paper'
+    when 'paper'
+      @computer_move = 'rock'
     end
   end
 
