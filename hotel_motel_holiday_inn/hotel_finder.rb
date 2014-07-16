@@ -1,16 +1,16 @@
 require 'csv'
 
-class HotelFinder
-  def initialize(hotel_data_file)
-    @hotel_data_file = hotel_data_file
+class HotelLister
+  def initialize(filename)
+    @filename = filename
   end
 
   def hotel_names
-    CSV.foreach(@hotel_data_file, headers: true) do |row|
+    CSV.foreach(@filename, headers: true) do |row|
       puts row["Hotel"]
     end
   end
 end
 
-hotel_finder = HotelFinder.new("hotels.csv")
-hotel_finder.hotel_names
+hotel_lister = HotelLister.new("hotels.csv")
+hotel_lister.hotel_names
