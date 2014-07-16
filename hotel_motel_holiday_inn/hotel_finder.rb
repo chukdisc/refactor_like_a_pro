@@ -6,10 +6,10 @@ class HotelFinder
   end
 
   def hotel_names
-    CSV.foreach(@hotel_data_file) do |row|
-    puts row.inspect
+    CSV.foreach(@hotel_data_file, headers:true) do |row|
+      puts row[0]
     end
-  end 
+  end
 end
 
 hotel_finder = HotelFinder.new("hotels.csv")
