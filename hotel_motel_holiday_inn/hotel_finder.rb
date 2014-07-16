@@ -1,27 +1,17 @@
 require 'csv'
 
-class HotelLister
+class HotelListReader
   def initialize(filename)
     @filename = filename
+    @hotels = []
   end
 
-  def hotel_names
-    user = User.new
-    CSV.foreach(@hotel_data_file, headers: true) do |row|
+  attr_reader: @hotel_data
+
+  def read_hotel_data
+    hotels = CSV.foreach(@hotel_data_file, headers: true) do |row|
+      @hotels << Hotel.new(row)
     end
   end
 end
 
-class User
-  def initialize
-  end
-
-  def query
-    puts "Enter the name of the hotel you would like to search for:"
-    user_search = gets.chomp
-    user_search
-  end
-end
-
-hotel_finder = HotelFinder.new("hotels.csv")
-hotel_finder.hotel_names
