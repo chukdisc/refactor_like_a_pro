@@ -30,5 +30,4 @@ class Hotel
     puts "Number of single beds: #{singles}"
     puts "Number of double beds: #{doubles}"
   end
-
 end

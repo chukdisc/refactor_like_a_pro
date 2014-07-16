@@ -10,9 +10,8 @@ class HotelDataReader
   attr_reader :hotels
 
   def read_hotel_data
-    hotels = CSV.foreach(@filename, headers: true) do |row|
+    CSV.foreach(@filename, headers: true) do |row|
       @hotels << Hotel.new(row)
     end
   end
 end
-
