@@ -12,5 +12,14 @@ class HotelLister
   end
 end
 
-hotel_lister = HotelLister.new("hotels.csv")
-hotel_lister.hotel_names
+class User
+  def initialize
+  end
+
+  def query
+    puts "Enter the name of the hotel you would like to search for:"
+  end
+end
+
+hotel_finder = HotelFinder.new("hotels.csv")
+hotel_finder.hotel_names
