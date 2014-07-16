@@ -6,8 +6,8 @@ class HotelLister
   end
 
   def hotel_names
-    CSV.foreach(@filename, headers: true) do |row|
-      puts row["Hotel"]
+    user = User.new
+    CSV.foreach(@hotel_data_file, headers: true) do |row|
     end
   end
 end
@@ -18,6 +18,8 @@ class User
 
   def query
     puts "Enter the name of the hotel you would like to search for:"
+    user_search = gets.chomp
+    user_search
   end
 end
 
