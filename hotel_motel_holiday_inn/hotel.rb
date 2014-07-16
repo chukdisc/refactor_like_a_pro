@@ -3,7 +3,7 @@ class Hotel
     @hotel_data = hotel_data
   end
 
-  def hotel
+  def name
     @hotel_data.fetch("Hotel")
   end
 
@@ -24,7 +24,7 @@ class Hotel
   end
 
   def print_hotel_info
-    puts "Hotel Name: #{hotel}"
+    puts "Hotel Name: #{name}"
     puts "Location: #{city}"
     puts "Phone: #{phone}"
     puts "Number of single beds: #{singles}"

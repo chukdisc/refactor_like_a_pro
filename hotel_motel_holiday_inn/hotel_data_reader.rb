@@ -1,4 +1,5 @@
 require 'csv'
+require "./hotel"
 
 class HotelDataReader
   def initialize(filename)
@@ -6,10 +7,10 @@ class HotelDataReader
     @hotels = []
   end
 
-  attr_reader: @hotels
+  attr_reader :hotels
 
   def read_hotel_data
-    hotels = CSV.foreach(@hotel_data_file, headers: true) do |row|
+    hotels = CSV.foreach(@filename, headers: true) do |row|
       @hotels << Hotel.new(row)
     end
   end
