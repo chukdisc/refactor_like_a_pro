@@ -25,7 +25,6 @@ class HotelQuery
   end
 end
 
-
 hotel_data_reader = HotelDataReader.new("hotels.csv")
 hotel_query = HotelQuery.new(hotel_data_reader.hotels)
 hotel_query.query_hotels
