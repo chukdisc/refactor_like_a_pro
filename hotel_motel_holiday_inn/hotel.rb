@@ -23,7 +23,7 @@ class Hotel
     @hotel_data.fetch("Number of Doubles")
   end
 
-  def print_hotel_info
+  def display
     puts "Hotel Name: #{name}"
     puts "Location: #{city}"
     puts "Phone: #{phone}"

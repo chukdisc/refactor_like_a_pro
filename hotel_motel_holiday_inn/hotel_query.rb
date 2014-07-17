@@ -1,4 +1,5 @@
 require "./hotel_data_reader"
+require "./null_hotel"
 
 class HotelQuery
   def initialize(hotels)
@@ -7,7 +8,7 @@ class HotelQuery
 
   def query_hotels
     set_search_criteria
-    find_hotel.print_hotel_info
+    find_hotel.display
   end
 
   def set_search_criteria
@@ -16,9 +17,11 @@ class HotelQuery
   end
 
   def find_hotel
-    @hotels.find do |hotel|
-      hotel.name == @search_criteria
-    end
+    @hotels.find { |hotel| matches_search?(hotel) } || NullHotel.new
+  end
+
+  def matches_search?(hotel)
+    hotel.name.downcase.include?(@search_criteria.downcase)
   end
 end
 
