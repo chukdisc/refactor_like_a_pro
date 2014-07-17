@@ -7,7 +7,7 @@ class HotelQuery
 
   def query_hotels
     set_search_criteria
-    find_hotel.print_hotel_info
+    find_hotel
   end
 
   def set_search_criteria
@@ -16,9 +16,14 @@ class HotelQuery
   end
 
   def find_hotel
-    @hotels.find do |hotel|
-      hotel.name == @search_criteria
-    end
+    hotel = @hotels.find { |hotel| !!(/#{@search_criteria}/.match(hotel.name)) } || NullObject.new
+    puts hotel.display
+  end
+end
+
+class NullObject
+  def display
+    "Sorry, your search did no yield any results"
   end
 end
 
