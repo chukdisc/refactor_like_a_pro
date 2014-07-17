@@ -1,4 +1,5 @@
 require "./hotel_data_reader"
+require "./null_hotel"
 
 class HotelQuery
   def initialize(hotels)
@@ -7,7 +8,7 @@ class HotelQuery
 
   def query_hotels
     set_search_criteria
-    find_hotel
+    find_hotel.display
   end
 
   def set_search_criteria
@@ -16,16 +17,14 @@ class HotelQuery
   end
 
   def find_hotel
-    hotel = @hotels.find { |hotel| !!(/#{@search_criteria}/.match(hotel.name)) } || NullObject.new
-    puts hotel.display
+    @hotels.find { |hotel| matches_search?(hotel) } || NullHotel.new
+  end
+
+  def matches_search?(hotel)
+    /#{@search_criteria}/i.match(hotel.name)
   end
 end
 
-class NullObject
-  def display
-    "Sorry, your search did no yield any results"
-  end
-end
 
 hotel_data_reader = HotelDataReader.new("hotels.csv")
 hotel_query = HotelQuery.new(hotel_data_reader.hotels)
