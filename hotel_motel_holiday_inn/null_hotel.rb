@@ -1,5 +1,5 @@
 class NullHotel
   def display
-    puts "Sorry, your search did no yield any results"
+    puts "Sorry, your search did not yield any results"
   end
 end

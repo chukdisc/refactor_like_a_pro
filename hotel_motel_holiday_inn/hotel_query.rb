@@ -21,7 +21,7 @@ class HotelQuery
   end
 
   def matches_search?(hotel)
-    /#{@search_criteria}/i.match(hotel.name)
+    hotel.name.downcase.include?(@search_criteria.downcase)
   end
 end
 
